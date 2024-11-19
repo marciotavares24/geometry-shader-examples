@@ -35,16 +35,22 @@ void main()
     // For each vertex received (3 vertices)
     for (int i = 0; i < 3; i++)
     {
-        // For now, just emit the vertex...
+        // Initial state: The vertex is the same
         // Emit the vertex received
-        gl_Position = gl_in[i].gl_Position;
+        // gl_Position = gl_in[i].gl_Position;
+        // g_color = v_color[i];
+        // EmitVertex();
+
+        // Solution: The vertex is moved in the direction of the normal
+        // Get normal and position (view space)
+        vec4 position = v_position[i];
+        vec4 normal = vec4(v_normal[i], 0);
+
+        // Emit the vertex moved (apply the projection matrix)
+        vec4 new_position = position + normal * direction_len;
+        gl_Position = u_proj * new_position;
         g_color = v_color[i];
         EmitVertex();
-
-
-        // What we need to do?
-        // Get normal and position (view space)
-        // Emit the vertex moved (apply the projection matrix)
     }
 
     // Emit the triangle

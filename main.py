@@ -16,10 +16,16 @@ skull = GeometricObject(vertices.skull, position=[-5, -5, -5], rotation=[-45, -4
 # Use the geometry shader to pass through the outputs of the vertex shader to the fragment shader
 def pass_through():
     # Shaders to use
+    #
+    # Initial state: only vertex and fragment shaders
+    # shaders_list = [(
+    #     "shaders/basic/vertex.glsl", "shaders/pass_through/fragment.glsl", []
+    # )]
+    # 
+    # Solution: add a list of geometry shaders to the shaders_list (one for each type of input geometry)
     shaders_list = [(
         "shaders/basic/vertex.glsl", "shaders/pass_through/fragment.glsl",
-        # Add the geometry shaders here (empty list to not use any)
-        []
+        ["shaders/pass_through/geometry_triangles.glsl", "shaders/pass_through/geometry_lines.glsl", "shaders/pass_through/geometry_points.glsl"]
     )]
 
     # Objects to render (switch between them)
@@ -59,8 +65,8 @@ def wireframe():
     # Objects to render (switch between them)
     object_list = [
         cube,
-        # sphere,
-        # skull,
+        sphere,
+        skull,
     ]
 
     return shaders_list, object_list
@@ -82,8 +88,8 @@ def normals():
     # Objects to render (switch between them)
     object_list = [
         cube,
-        # sphere,
-        # skull,
+        sphere,
+        skull,
     ]
 
     return shaders_list, object_list
@@ -100,8 +106,8 @@ def explode():
     # Objects to render (switch between them)
     object_list = [
         cube,
-        # sphere,
-        # skull,
+        sphere,
+        skull,
     ]
 
     return shaders_list, object_list

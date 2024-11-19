@@ -2,8 +2,12 @@
 // What the geometry shader receives? (points, lines, triangles)
 layout (triangles) in;
 // What the geometry shader sends? (points, line_strip, triangle_strip)
-// What we want to send? How many vertices?
-layout (triangle_strip, max_vertices = 3) out;
+//
+// Initial state: Sends the same triangle
+// layout (triangle_strip, max_vertices = 3) out;
+// 
+// Solution: Sends triangles to form a pyramid
+layout (triangle_strip, max_vertices = 5) out;
 
 
 // Uniform for the projection matrix
@@ -68,10 +72,18 @@ void main()
         EmitVertex();
     }
 
-    // What we need to do?
-    // Emit the base vertices
-    // Emit the top vertex of the pyramid
+
+    // Solution: Emit the top vertex and the first vertex again
+    // Emit the top vertex
+    gl_Position = get_pyramid_top();
+    g_color = get_pyramid_top_color();
+    EmitVertex();
+
     // Emit the first vertex again to close the triangle strip
+    gl_Position = gl_in[0].gl_Position;
+    g_color = v_color[0];
+    EmitVertex();
+
 
     // Emit the triangle strip
     EndPrimitive();
