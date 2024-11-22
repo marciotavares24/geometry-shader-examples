@@ -140,12 +140,16 @@ if __name__ == "__main__":
 
     # Parse argument to choose the example to run
     if len(sys.argv) >= 2:
-        example = sys.argv[1]
+        example = sys.argv[1].lower()
         example_to_run = example_map.get(example)
 
         # Check if the example is valid
         if example_to_run is None:
-            print(f"Invalid example: {example}")
+            print(f"\nInvalid example: {example}")
+
+            # Print the available examples
+            example_names = [key for key in example_map.keys() if not key.isnumeric()]
+            print(f"Examples: {', '.join(example_names)}")
             sys.exit(1)
     else:
         # Default example

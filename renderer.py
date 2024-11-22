@@ -38,6 +38,11 @@ class Renderer:
         pg.display.set_caption("OpenGL Geometry Shader Examples")
         pg.display.set_mode(self.window_size, pg.DOUBLEBUF | pg.OPENGL | pg.RESIZABLE | pg.BLEND_ALPHA_SDL2)
 
+        # Fix for Apple Silicon (Metal)
+        # pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
+        # pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
+        # pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
+
         # OpenGL settings
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_BLEND)
